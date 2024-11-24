@@ -1,0 +1,245 @@
+2024-11-24 11:20:59,336 INFO    StreamThr :171572 [internal.py:wandb_internal():85] W&B internal server running at pid: 171572, started at: 2024-11-24 11:20:59.336101
+2024-11-24 11:20:59,338 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: status
+2024-11-24 11:20:59,340 INFO    WriterThread:171572 [datastore.py:open_for_write():87] open: /mnt/ozaki/finetunehub/wandb/run-20241124_112059-ngkldigy/run-ngkldigy.wandb
+2024-11-24 11:20:59,340 DEBUG   SenderThread:171572 [sender.py:send():379] send: header
+2024-11-24 11:20:59,341 DEBUG   SenderThread:171572 [sender.py:send():379] send: run
+2024-11-24 11:20:59,545 INFO    SenderThread:171572 [dir_watcher.py:__init__():211] watching files in: /mnt/ozaki/finetunehub/wandb/run-20241124_112059-ngkldigy/files
+2024-11-24 11:20:59,546 INFO    SenderThread:171572 [sender.py:_start_run_threads():1188] run started: ngkldigy with start time 1732447259.335967
+2024-11-24 11:20:59,552 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: check_version
+2024-11-24 11:20:59,552 DEBUG   SenderThread:171572 [sender.py:send_request():406] send_request: check_version
+2024-11-24 11:20:59,600 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: run_start
+2024-11-24 11:20:59,629 DEBUG   HandlerThread:171572 [system_info.py:__init__():26] System info init
+2024-11-24 11:20:59,629 DEBUG   HandlerThread:171572 [system_info.py:__init__():41] System info init done
+2024-11-24 11:20:59,629 INFO    HandlerThread:171572 [system_monitor.py:start():194] Starting system monitor
+2024-11-24 11:20:59,629 INFO    SystemMonitor:171572 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-11-24 11:20:59,629 INFO    HandlerThread:171572 [system_monitor.py:probe():214] Collecting system info
+2024-11-24 11:20:59,630 INFO    SystemMonitor:171572 [interfaces.py:start():188] Started cpu monitoring
+2024-11-24 11:20:59,631 INFO    SystemMonitor:171572 [interfaces.py:start():188] Started disk monitoring
+2024-11-24 11:20:59,632 INFO    SystemMonitor:171572 [interfaces.py:start():188] Started gpu monitoring
+2024-11-24 11:20:59,633 INFO    SystemMonitor:171572 [interfaces.py:start():188] Started memory monitoring
+2024-11-24 11:20:59,633 INFO    SystemMonitor:171572 [interfaces.py:start():188] Started network monitoring
+2024-11-24 11:20:59,659 DEBUG   HandlerThread:171572 [system_info.py:probe():152] Probing system
+2024-11-24 11:20:59,661 DEBUG   HandlerThread:171572 [gitlib.py:_init_repo():56] git repository is invalid
+2024-11-24 11:20:59,661 DEBUG   HandlerThread:171572 [system_info.py:probe():200] Probing system done
+2024-11-24 11:20:59,661 DEBUG   HandlerThread:171572 [system_monitor.py:probe():223] {'os': 'Linux-5.15.0-1067-azure-x86_64-with-glibc2.35', 'python': '3.10.12', 'heartbeatAt': '2024-11-24T11:20:59.659842', 'startedAt': '2024-11-24T11:20:59.332321', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '/mnt/ozaki/finetunehub/scripts/main.py', 'codePathLocal': 'scripts/main.py', 'codePath': 'scripts/main.py', 'host': '8f4f821716f7', 'username': 'root', 'executable': '/usr/bin/python3', 'cpu_count': 24, 'cpu_count_logical': 24, 'cpu_freq': {'current': 2444.4791250000007, 'min': 0.0, 'max': 0.0}, 'cpu_freq_per_core': [{'current': 2445.442, 'min': 0.0, 'max': 0.0}, {'current': 2445.442, 'min': 0.0, 'max': 0.0}, {'current': 2422.333, 'min': 0.0, 'max': 0.0}, {'current': 2445.442, 'min': 0.0, 'max': 0.0}, {'current': 2445.442, 'min': 0.0, 'max': 0.0}, {'current': 2445.442, 'min': 0.0, 'max': 0.0}, {'current': 2445.442, 'min': 0.0, 'max': 0.0}, {'current': 2445.442, 'min': 0.0, 'max': 0.0}, {'current': 2445.442, 'min': 0.0, 'max': 0.0}, {'current': 2445.442, 'min': 0.0, 'max': 0.0}, {'current': 2445.442, 'min': 0.0, 'max': 0.0}, {'current': 2445.442, 'min': 0.0, 'max': 0.0}, {'current': 2445.442, 'min': 0.0, 'max': 0.0}, {'current': 2445.442, 'min': 0.0, 'max': 0.0}, {'current': 2445.442, 'min': 0.0, 'max': 0.0}, {'current': 2445.442, 'min': 0.0, 'max': 0.0}, {'current': 2445.442, 'min': 0.0, 'max': 0.0}, {'current': 2445.442, 'min': 0.0, 'max': 0.0}, {'current': 2445.442, 'min': 0.0, 'max': 0.0}, {'current': 2445.442, 'min': 0.0, 'max': 0.0}, {'current': 2445.442, 'min': 0.0, 'max': 0.0}, {'current': 2445.442, 'min': 0.0, 'max': 0.0}, {'current': 2445.442, 'min': 0.0, 'max': 0.0}, {'current': 2445.442, 'min': 0.0, 'max': 0.0}], 'disk': {'/': {'total': 992.2479553222656, 'used': 673.0965805053711}}, 'gpu': 'NVIDIA A100 80GB PCIe', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA A100 80GB PCIe', 'memory_total': 85899345920}], 'memory': {'total': 216.2595672607422}}
+2024-11-24 11:20:59,661 INFO    HandlerThread:171572 [system_monitor.py:probe():224] Finished collecting system info
+2024-11-24 11:20:59,661 INFO    HandlerThread:171572 [system_monitor.py:probe():227] Publishing system info
+2024-11-24 11:20:59,662 INFO    HandlerThread:171572 [system_monitor.py:probe():229] Finished publishing system info
+2024-11-24 11:20:59,666 DEBUG   SenderThread:171572 [sender.py:send():379] send: files
+2024-11-24 11:20:59,666 INFO    SenderThread:171572 [sender.py:_save_file():1454] saving file wandb-metadata.json with policy now
+2024-11-24 11:20:59,848 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: python_packages
+2024-11-24 11:20:59,849 DEBUG   SenderThread:171572 [sender.py:send_request():406] send_request: python_packages
+2024-11-24 11:20:59,850 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: stop_status
+2024-11-24 11:20:59,850 DEBUG   SenderThread:171572 [sender.py:send_request():406] send_request: stop_status
+2024-11-24 11:20:59,893 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:20:59,924 INFO    wandb-upload_0:171572 [upload_job.py:push():130] Uploaded file /tmp/tmp7s0ix573wandb/2bv5ju44-wandb-metadata.json
+2024-11-24 11:21:00,003 DEBUG   SenderThread:171572 [sender.py:send():379] send: telemetry
+2024-11-24 11:21:00,547 INFO    Thread-12 :171572 [dir_watcher.py:_on_file_created():271] file/dir created: /mnt/ozaki/finetunehub/wandb/run-20241124_112059-ngkldigy/files/requirements.txt
+2024-11-24 11:21:00,547 INFO    Thread-12 :171572 [dir_watcher.py:_on_file_created():271] file/dir created: /mnt/ozaki/finetunehub/wandb/run-20241124_112059-ngkldigy/files/wandb-metadata.json
+2024-11-24 11:21:00,850 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:01,546 INFO    Thread-12 :171572 [dir_watcher.py:_on_file_created():271] file/dir created: /mnt/ozaki/finetunehub/wandb/run-20241124_112059-ngkldigy/files/output.log
+2024-11-24 11:21:01,850 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:02,852 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:03,547 INFO    Thread-12 :171572 [dir_watcher.py:_on_file_modified():288] file/dir modified: /mnt/ozaki/finetunehub/wandb/run-20241124_112059-ngkldigy/files/output.log
+2024-11-24 11:21:03,852 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:04,850 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: status_report
+2024-11-24 11:21:04,851 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:05,548 INFO    Thread-12 :171572 [dir_watcher.py:_on_file_modified():288] file/dir modified: /mnt/ozaki/finetunehub/wandb/run-20241124_112059-ngkldigy/files/output.log
+2024-11-24 11:21:05,906 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:06,904 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:07,549 INFO    Thread-12 :171572 [dir_watcher.py:_on_file_modified():288] file/dir modified: /mnt/ozaki/finetunehub/wandb/run-20241124_112059-ngkldigy/files/output.log
+2024-11-24 11:21:08,099 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:09,094 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:09,550 INFO    Thread-12 :171572 [dir_watcher.py:_on_file_modified():288] file/dir modified: /mnt/ozaki/finetunehub/wandb/run-20241124_112059-ngkldigy/files/output.log
+2024-11-24 11:21:09,850 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: status_report
+2024-11-24 11:21:10,094 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:11,094 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:12,094 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:13,095 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:14,095 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:14,849 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: stop_status
+2024-11-24 11:21:14,849 DEBUG   SenderThread:171572 [sender.py:send_request():406] send_request: stop_status
+2024-11-24 11:21:14,918 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: status_report
+2024-11-24 11:21:15,095 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:16,095 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:17,096 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:18,096 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:19,096 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:20,096 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:20,851 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: status_report
+2024-11-24 11:21:21,096 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:22,096 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:23,096 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:24,096 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:25,096 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:26,096 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:26,851 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: status_report
+2024-11-24 11:21:27,097 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:28,097 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:29,097 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:29,849 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: stop_status
+2024-11-24 11:21:29,850 DEBUG   SenderThread:171572 [sender.py:send_request():406] send_request: stop_status
+2024-11-24 11:21:30,097 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:31,097 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:31,953 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: status_report
+2024-11-24 11:21:32,097 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:32,557 INFO    Thread-12 :171572 [dir_watcher.py:_on_file_modified():288] file/dir modified: /mnt/ozaki/finetunehub/wandb/run-20241124_112059-ngkldigy/files/config.yaml
+2024-11-24 11:21:33,097 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:34,097 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:35,098 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:36,098 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:37,098 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:37,851 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: status_report
+2024-11-24 11:21:38,098 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:39,098 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:40,098 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:41,098 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:42,099 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:42,851 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: status_report
+2024-11-24 11:21:43,099 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:44,099 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:44,849 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: stop_status
+2024-11-24 11:21:44,850 DEBUG   SenderThread:171572 [sender.py:send_request():406] send_request: stop_status
+2024-11-24 11:21:45,099 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:46,099 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:47,099 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:47,939 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: status_report
+2024-11-24 11:21:48,099 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:49,099 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:50,099 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:50,895 DEBUG   SenderThread:171572 [sender.py:send():379] send: exit
+2024-11-24 11:21:50,896 INFO    SenderThread:171572 [sender.py:send_exit():586] handling exit code: 1
+2024-11-24 11:21:50,896 INFO    SenderThread:171572 [sender.py:send_exit():588] handling runtime: 51
+2024-11-24 11:21:50,897 INFO    SenderThread:171572 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-11-24 11:21:50,897 INFO    SenderThread:171572 [sender.py:send_exit():594] send defer
+2024-11-24 11:21:50,897 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: defer
+2024-11-24 11:21:50,897 INFO    HandlerThread:171572 [handler.py:handle_request_defer():184] handle defer: 0
+2024-11-24 11:21:50,898 DEBUG   SenderThread:171572 [sender.py:send_request():406] send_request: defer
+2024-11-24 11:21:50,898 INFO    SenderThread:171572 [sender.py:send_request_defer():610] handle sender defer: 0
+2024-11-24 11:21:50,898 INFO    SenderThread:171572 [sender.py:transition_state():614] send defer: 1
+2024-11-24 11:21:50,898 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: defer
+2024-11-24 11:21:50,898 INFO    HandlerThread:171572 [handler.py:handle_request_defer():184] handle defer: 1
+2024-11-24 11:21:50,898 DEBUG   SenderThread:171572 [sender.py:send_request():406] send_request: defer
+2024-11-24 11:21:50,898 INFO    SenderThread:171572 [sender.py:send_request_defer():610] handle sender defer: 1
+2024-11-24 11:21:50,898 INFO    SenderThread:171572 [sender.py:transition_state():614] send defer: 2
+2024-11-24 11:21:50,898 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: defer
+2024-11-24 11:21:50,898 INFO    HandlerThread:171572 [handler.py:handle_request_defer():184] handle defer: 2
+2024-11-24 11:21:50,898 INFO    HandlerThread:171572 [system_monitor.py:finish():203] Stopping system monitor
+2024-11-24 11:21:50,899 INFO    HandlerThread:171572 [interfaces.py:finish():200] Joined cpu monitor
+2024-11-24 11:21:50,899 INFO    HandlerThread:171572 [interfaces.py:finish():200] Joined disk monitor
+2024-11-24 11:21:50,899 DEBUG   SystemMonitor:171572 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2024-11-24 11:21:50,900 DEBUG   SystemMonitor:171572 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2024-11-24 11:21:50,900 DEBUG   SystemMonitor:171572 [system_monitor.py:_start():183] Publishing last batch of metrics
+2024-11-24 11:21:51,021 INFO    HandlerThread:171572 [interfaces.py:finish():200] Joined gpu monitor
+2024-11-24 11:21:51,021 INFO    HandlerThread:171572 [interfaces.py:finish():200] Joined memory monitor
+2024-11-24 11:21:51,021 INFO    HandlerThread:171572 [interfaces.py:finish():200] Joined network monitor
+2024-11-24 11:21:51,022 DEBUG   SenderThread:171572 [sender.py:send_request():406] send_request: defer
+2024-11-24 11:21:51,022 INFO    SenderThread:171572 [sender.py:send_request_defer():610] handle sender defer: 2
+2024-11-24 11:21:51,022 INFO    SenderThread:171572 [sender.py:transition_state():614] send defer: 3
+2024-11-24 11:21:51,022 DEBUG   SenderThread:171572 [sender.py:send():379] send: stats
+2024-11-24 11:21:51,022 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: defer
+2024-11-24 11:21:51,023 INFO    HandlerThread:171572 [handler.py:handle_request_defer():184] handle defer: 3
+2024-11-24 11:21:51,023 DEBUG   SenderThread:171572 [sender.py:send_request():406] send_request: defer
+2024-11-24 11:21:51,023 INFO    SenderThread:171572 [sender.py:send_request_defer():610] handle sender defer: 3
+2024-11-24 11:21:51,023 INFO    SenderThread:171572 [sender.py:transition_state():614] send defer: 4
+2024-11-24 11:21:51,023 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: defer
+2024-11-24 11:21:51,023 INFO    HandlerThread:171572 [handler.py:handle_request_defer():184] handle defer: 4
+2024-11-24 11:21:51,023 DEBUG   SenderThread:171572 [sender.py:send_request():406] send_request: defer
+2024-11-24 11:21:51,023 INFO    SenderThread:171572 [sender.py:send_request_defer():610] handle sender defer: 4
+2024-11-24 11:21:51,023 INFO    SenderThread:171572 [sender.py:transition_state():614] send defer: 5
+2024-11-24 11:21:51,023 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: defer
+2024-11-24 11:21:51,024 INFO    HandlerThread:171572 [handler.py:handle_request_defer():184] handle defer: 5
+2024-11-24 11:21:51,024 DEBUG   SenderThread:171572 [sender.py:send():379] send: summary
+2024-11-24 11:21:51,024 INFO    SenderThread:171572 [sender.py:_save_file():1454] saving file wandb-summary.json with policy end
+2024-11-24 11:21:51,024 DEBUG   SenderThread:171572 [sender.py:send_request():406] send_request: defer
+2024-11-24 11:21:51,024 INFO    SenderThread:171572 [sender.py:send_request_defer():610] handle sender defer: 5
+2024-11-24 11:21:51,024 INFO    SenderThread:171572 [sender.py:transition_state():614] send defer: 6
+2024-11-24 11:21:51,024 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: defer
+2024-11-24 11:21:51,024 INFO    HandlerThread:171572 [handler.py:handle_request_defer():184] handle defer: 6
+2024-11-24 11:21:51,025 DEBUG   SenderThread:171572 [sender.py:send_request():406] send_request: defer
+2024-11-24 11:21:51,025 INFO    SenderThread:171572 [sender.py:send_request_defer():610] handle sender defer: 6
+2024-11-24 11:21:51,025 INFO    SenderThread:171572 [sender.py:transition_state():614] send defer: 7
+2024-11-24 11:21:51,025 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: status_report
+2024-11-24 11:21:51,025 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: defer
+2024-11-24 11:21:51,025 INFO    HandlerThread:171572 [handler.py:handle_request_defer():184] handle defer: 7
+2024-11-24 11:21:51,025 DEBUG   SenderThread:171572 [sender.py:send_request():406] send_request: defer
+2024-11-24 11:21:51,025 INFO    SenderThread:171572 [sender.py:send_request_defer():610] handle sender defer: 7
+2024-11-24 11:21:51,563 INFO    Thread-12 :171572 [dir_watcher.py:_on_file_modified():288] file/dir modified: /mnt/ozaki/finetunehub/wandb/run-20241124_112059-ngkldigy/files/output.log
+2024-11-24 11:21:51,563 INFO    Thread-12 :171572 [dir_watcher.py:_on_file_created():271] file/dir created: /mnt/ozaki/finetunehub/wandb/run-20241124_112059-ngkldigy/files/wandb-summary.json
+2024-11-24 11:21:51,895 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: poll_exit
+2024-11-24 11:21:52,956 INFO    SenderThread:171572 [sender.py:transition_state():614] send defer: 8
+2024-11-24 11:21:52,956 DEBUG   SenderThread:171572 [sender.py:send_request():406] send_request: poll_exit
+2024-11-24 11:21:52,957 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: defer
+2024-11-24 11:21:52,957 INFO    HandlerThread:171572 [handler.py:handle_request_defer():184] handle defer: 8
+2024-11-24 11:21:52,957 DEBUG   SenderThread:171572 [sender.py:send_request():406] send_request: defer
+2024-11-24 11:21:52,957 INFO    SenderThread:171572 [sender.py:send_request_defer():610] handle sender defer: 8
+2024-11-24 11:21:52,957 INFO    SenderThread:171572 [job_builder.py:build():440] Attempting to build job artifact
+2024-11-24 11:21:52,957 INFO    SenderThread:171572 [job_builder.py:_get_source_type():580] no source found
+2024-11-24 11:21:52,957 INFO    SenderThread:171572 [sender.py:transition_state():614] send defer: 9
+2024-11-24 11:21:52,957 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: defer
+2024-11-24 11:21:52,958 INFO    HandlerThread:171572 [handler.py:handle_request_defer():184] handle defer: 9
+2024-11-24 11:21:52,958 DEBUG   SenderThread:171572 [sender.py:send_request():406] send_request: defer
+2024-11-24 11:21:52,958 INFO    SenderThread:171572 [sender.py:send_request_defer():610] handle sender defer: 9
+2024-11-24 11:21:52,958 INFO    SenderThread:171572 [dir_watcher.py:finish():358] shutting down directory watcher
+2024-11-24 11:21:53,564 INFO    Thread-12 :171572 [dir_watcher.py:_on_file_modified():288] file/dir modified: /mnt/ozaki/finetunehub/wandb/run-20241124_112059-ngkldigy/files/output.log
+2024-11-24 11:21:53,565 INFO    SenderThread:171572 [dir_watcher.py:finish():388] scan: /mnt/ozaki/finetunehub/wandb/run-20241124_112059-ngkldigy/files
+2024-11-24 11:21:53,565 INFO    SenderThread:171572 [dir_watcher.py:finish():402] scan save: /mnt/ozaki/finetunehub/wandb/run-20241124_112059-ngkldigy/files/wandb-summary.json wandb-summary.json
+2024-11-24 11:21:53,565 INFO    SenderThread:171572 [dir_watcher.py:finish():402] scan save: /mnt/ozaki/finetunehub/wandb/run-20241124_112059-ngkldigy/files/config.yaml config.yaml
+2024-11-24 11:21:53,565 INFO    SenderThread:171572 [dir_watcher.py:finish():402] scan save: /mnt/ozaki/finetunehub/wandb/run-20241124_112059-ngkldigy/files/wandb-metadata.json wandb-metadata.json
+2024-11-24 11:21:53,565 INFO    SenderThread:171572 [dir_watcher.py:finish():402] scan save: /mnt/ozaki/finetunehub/wandb/run-20241124_112059-ngkldigy/files/requirements.txt requirements.txt
+2024-11-24 11:21:53,567 INFO    SenderThread:171572 [dir_watcher.py:finish():402] scan save: /mnt/ozaki/finetunehub/wandb/run-20241124_112059-ngkldigy/files/output.log output.log
+2024-11-24 11:21:53,571 INFO    SenderThread:171572 [sender.py:transition_state():614] send defer: 10
+2024-11-24 11:21:53,571 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: defer
+2024-11-24 11:21:53,571 INFO    HandlerThread:171572 [handler.py:handle_request_defer():184] handle defer: 10
+2024-11-24 11:21:53,573 DEBUG   SenderThread:171572 [sender.py:send_request():406] send_request: defer
+2024-11-24 11:21:53,574 INFO    SenderThread:171572 [sender.py:send_request_defer():610] handle sender defer: 10
+2024-11-24 11:21:53,574 INFO    SenderThread:171572 [file_pusher.py:finish():169] shutting down file pusher
+2024-11-24 11:21:53,758 INFO    wandb-upload_0:171572 [upload_job.py:push():130] Uploaded file /mnt/ozaki/finetunehub/wandb/run-20241124_112059-ngkldigy/files/wandb-summary.json
+2024-11-24 11:21:53,800 INFO    wandb-upload_2:171572 [upload_job.py:push():130] Uploaded file /mnt/ozaki/finetunehub/wandb/run-20241124_112059-ngkldigy/files/requirements.txt
+2024-11-24 11:21:53,831 INFO    wandb-upload_3:171572 [upload_job.py:push():130] Uploaded file /mnt/ozaki/finetunehub/wandb/run-20241124_112059-ngkldigy/files/output.log
+2024-11-24 11:21:53,896 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: poll_exit
+2024-11-24 11:21:53,896 DEBUG   SenderThread:171572 [sender.py:send_request():406] send_request: poll_exit
+2024-11-24 11:21:53,901 INFO    wandb-upload_1:171572 [upload_job.py:push():130] Uploaded file /mnt/ozaki/finetunehub/wandb/run-20241124_112059-ngkldigy/files/config.yaml
+2024-11-24 11:21:54,102 INFO    Thread-11 (_thread_body):171572 [sender.py:transition_state():614] send defer: 11
+2024-11-24 11:21:54,102 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: defer
+2024-11-24 11:21:54,102 INFO    HandlerThread:171572 [handler.py:handle_request_defer():184] handle defer: 11
+2024-11-24 11:21:54,103 DEBUG   SenderThread:171572 [sender.py:send_request():406] send_request: defer
+2024-11-24 11:21:54,103 INFO    SenderThread:171572 [sender.py:send_request_defer():610] handle sender defer: 11
+2024-11-24 11:21:54,103 INFO    SenderThread:171572 [file_pusher.py:join():175] waiting for file pusher
+2024-11-24 11:21:54,103 INFO    SenderThread:171572 [sender.py:transition_state():614] send defer: 12
+2024-11-24 11:21:54,103 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: defer
+2024-11-24 11:21:54,103 INFO    HandlerThread:171572 [handler.py:handle_request_defer():184] handle defer: 12
+2024-11-24 11:21:54,104 DEBUG   SenderThread:171572 [sender.py:send_request():406] send_request: defer
+2024-11-24 11:21:54,104 INFO    SenderThread:171572 [sender.py:send_request_defer():610] handle sender defer: 12
+2024-11-24 11:21:54,104 INFO    SenderThread:171572 [file_stream.py:finish():601] file stream finish called
+2024-11-24 11:21:54,168 INFO    SenderThread:171572 [file_stream.py:finish():605] file stream finish is done
+2024-11-24 11:21:54,168 INFO    SenderThread:171572 [sender.py:transition_state():614] send defer: 13
+2024-11-24 11:21:54,169 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: defer
+2024-11-24 11:21:54,169 INFO    HandlerThread:171572 [handler.py:handle_request_defer():184] handle defer: 13
+2024-11-24 11:21:54,169 DEBUG   SenderThread:171572 [sender.py:send_request():406] send_request: defer
+2024-11-24 11:21:54,169 INFO    SenderThread:171572 [sender.py:send_request_defer():610] handle sender defer: 13
+2024-11-24 11:21:54,169 INFO    SenderThread:171572 [sender.py:transition_state():614] send defer: 14
+2024-11-24 11:21:54,169 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: defer
+2024-11-24 11:21:54,169 INFO    HandlerThread:171572 [handler.py:handle_request_defer():184] handle defer: 14
+2024-11-24 11:21:54,170 DEBUG   SenderThread:171572 [sender.py:send():379] send: final
+2024-11-24 11:21:54,170 DEBUG   SenderThread:171572 [sender.py:send():379] send: footer
+2024-11-24 11:21:54,170 DEBUG   SenderThread:171572 [sender.py:send_request():406] send_request: defer
+2024-11-24 11:21:54,170 INFO    SenderThread:171572 [sender.py:send_request_defer():610] handle sender defer: 14
+2024-11-24 11:21:54,170 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: poll_exit
+2024-11-24 11:21:54,171 DEBUG   SenderThread:171572 [sender.py:send_request():406] send_request: poll_exit
+2024-11-24 11:21:54,171 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: server_info
+2024-11-24 11:21:54,171 DEBUG   SenderThread:171572 [sender.py:send_request():406] send_request: server_info
+2024-11-24 11:21:54,172 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: poll_exit
+2024-11-24 11:21:54,173 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: get_summary
+2024-11-24 11:21:54,173 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: sampled_history
+2024-11-24 11:21:54,173 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: internal_messages
+2024-11-24 11:21:54,222 DEBUG   SenderThread:171572 [sender.py:send_request():406] send_request: poll_exit
+2024-11-24 11:21:54,223 INFO    MainThread:171572 [wandb_run.py:_footer_history_summary_info():3991] rendering history
+2024-11-24 11:21:54,223 INFO    MainThread:171572 [wandb_run.py:_footer_history_summary_info():4023] rendering summary
+2024-11-24 11:21:54,223 INFO    MainThread:171572 [wandb_run.py:_footer_sync_info():3950] logging synced files
+2024-11-24 11:21:54,223 DEBUG   HandlerThread:171572 [handler.py:handle_request():158] handle_request: shutdown
+2024-11-24 11:21:54,223 INFO    HandlerThread:171572 [handler.py:finish():882] shutting down handler
+2024-11-24 11:21:55,173 INFO    WriterThread:171572 [datastore.py:close():296] close: /mnt/ozaki/finetunehub/wandb/run-20241124_112059-ngkldigy/run-ngkldigy.wandb
+2024-11-24 11:21:55,223 INFO    SenderThread:171572 [sender.py:finish():1608] shutting down sender
+2024-11-24 11:21:55,223 INFO    SenderThread:171572 [file_pusher.py:finish():169] shutting down file pusher
+2024-11-24 11:21:55,223 INFO    SenderThread:171572 [file_pusher.py:join():175] waiting for file pusher

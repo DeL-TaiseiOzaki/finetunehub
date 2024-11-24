@@ -1,0 +1,162 @@
+{
+    "os": "Linux-5.15.0-1067-azure-x86_64-with-glibc2.35",
+    "python": "3.10.12",
+    "heartbeatAt": "2024-09-30T17:52:03.553229",
+    "startedAt": "2024-09-30T17:52:03.462458",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/mnt/ozaki/finetunehub/scripts/main.py",
+    "codePathLocal": "scripts/main.py",
+    "codePath": "scripts/main.py",
+    "host": "8f4f821716f7",
+    "username": "root",
+    "executable": "/usr/bin/python3",
+    "cpu_count": 24,
+    "cpu_count_logical": 24,
+    "cpu_freq": {
+        "current": 2470.476250000001,
+        "min": 0.0,
+        "max": 0.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2445.442,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.442,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.442,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.442,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.442,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3136.629,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.442,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.442,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.442,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3046.264,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.442,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.442,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.442,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.442,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.442,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.442,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.442,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.442,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.442,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.442,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.442,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.442,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.442,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2445.442,
+            "min": 0.0,
+            "max": 0.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 992.2479553222656,
+            "used": 523.4907989501953
+        }
+    },
+    "gpu": "NVIDIA A100 80GB PCIe",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA A100 80GB PCIe",
+            "memory_total": 85899345920
+        }
+    ],
+    "memory": {
+        "total": 216.2595672607422
+    }
+}

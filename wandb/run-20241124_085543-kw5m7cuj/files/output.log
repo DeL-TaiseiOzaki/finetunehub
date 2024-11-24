@@ -1,0 +1,12 @@
+
+
+
+Loading checkpoint shards: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 8/8 [00:05<00:00,  1.60it/s]
+Traceback (most recent call last):
+  File "/mnt/ozaki/finetunehub/scripts/main.py", line 74, in <module>
+    main()
+  File "/mnt/ozaki/finetunehub/scripts/main.py", line 64, in main
+    train_dataset = load_and_prepare_datasets(config, tokenizer, logger)
+  File "/mnt/ozaki/finetunehub/scripts/data_processing.py", line 145, in load_and_prepare_datasets
+    return {'text': prompts}
+NameError: name 'prompts' is not defined
