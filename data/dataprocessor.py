@@ -2,61 +2,64 @@ from typing import Dict, List, Any
 from datasets import load_dataset
 from transformers import PreTrainedTokenizer
 from functools import partial
+import logging
+
+logger = logging.getLogger(__name__)
 
 class DataProcessor:
-    def __init__(self, tokenizer: PreTrainedTokenizer, chunk_length: int = 2048):
+    def __init__(self, 
+                 tokenizer: PreTrainedTokenizer, 
+                 chunk_length: int = 2048,
+                 max_length: int = 2048):
         self.tokenizer = tokenizer
         self.chunk_length = chunk_length
+        self.max_length = max_length
 
     def format_prompt(self, sample: Dict[str, str]) -> str:
-        """プロンプトをGemmaの形式に整形"""
-        instruction = f"<start_of_turn>user\n{sample['instruction']}<end_of_turn>\n"
-        input_text = (f"<start_of_turn>user\n{sample['input']}<end_of_turn>\n" 
-                     if sample.get("input") else "")
-        output = f"<start_of_turn>assistant\n{sample['output']}<end_of_turn>"
-        return instruction + input_text + output
+        """プロンプトをLLM-JPの形式に整形"""
+        instruction = sample['instruction']
+        input_text = sample.get('input', '')
+        output = sample['output']
+        
+        if input_text:
+            prompt = f"指示:\n{instruction}\n\n入力:\n{input_text}\n\n出力:\n{output}"
+        else:
+            prompt = f"指示:\n{instruction}\n\n出力:\n{output}"
+            
+        return prompt
 
     def template_dataset(self, sample: Dict[str, str]) -> Dict[str, str]:
         """データセットにテンプレートを適用"""
         sample["text"] = f"{self.format_prompt(sample)}{self.tokenizer.eos_token}"
         return sample
 
-    def chunk_data(self, samples: Dict[str, List[Any]]) -> Dict[str, List[Any]]:
-        """データを指定された長さのチャンクに分割"""
-        concatenated = {k: sum(samples[k], []) for k in samples.keys()}
-        total_length = len(concatenated[list(samples.keys())[0]])
-        result = {k: [] for k in samples.keys()}
-        
-        for i in range(0, total_length, self.chunk_length):
-            for k in samples.keys():
-                result[k].append(concatenated[k][i:i + self.chunk_length])
-                if len(result[k][-1]) < self.chunk_length:
-                    remainder = self.chunk_length - len(result[k][-1])
-                    result[k][-1].extend([self.tokenizer.pad_token_id] * remainder)
-        return result
-
     def prepare_dataset(self, dataset_name: str):
         """データセットの準備"""
-        # データセットのロード
+        logger.info(f"データセット '{dataset_name}' をロードしています...")
         dataset = load_dataset(dataset_name, split="train")
         
-        # テンプレートの適用
+        logger.info("プロンプトテンプレートを適用しています...")
         dataset = dataset.map(
             self.template_dataset,
-            remove_columns=list(dataset.features)
+            remove_columns=dataset.column_names,
+            desc="Applying templates"
         )
         
-        # トークン化
+        logger.info("データセットをトークン化しています...")
+        def tokenize_function(examples):
+            return self.tokenizer(
+                examples["text"],
+                truncation=True,
+                max_length=self.max_length,
+                padding="max_length"
+            )
+        
         tokenized_dataset = dataset.map(
-            lambda x: self.tokenizer(x["text"]),
+            tokenize_function,
             batched=True,
-            remove_columns=list(dataset.features)
+            remove_columns=dataset.column_names,
+            desc="Tokenizing"
         )
         
-        # チャンク化
-        chunked_dataset = tokenized_dataset.map(
-            self.chunk_data,
-            batched=True,
-        )
-        
-        return chunked_dataset
+        logger.info(f"データセットの準備が完了しました。サイズ: {len(tokenized_dataset)}")
+        return tokenized_dataset

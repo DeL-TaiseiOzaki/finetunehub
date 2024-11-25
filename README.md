@@ -1,192 +1,160 @@
-# Gemma Fine-tuning
+# LLM-JP Fine-tuning
 
-This repository contains code for full parameter fine-tuning of the Gemma-2b-9b model on A100 80GB GPU. The implementation uses DeepSpeed for efficient training and memory optimization.
+このリポジトリには、LLM-JP-3-13Bモデルのフルパラメータファインチューニングのためのコードが含まれています。DeepSpeedを使用して効率的なトレーニングとメモリ最適化を実現しています。
 
-## Features
+## 機能
 
-- Full parameter fine-tuning of Gemma-2b-9b
-- DeepSpeed ZeRO Stage-2 optimization
-- Efficient memory management for A100 GPU
-- Modular and extensible codebase
-- Support for custom datasets and training configurations
+- LLM-JP-3-13Bのフルパラメータファインチューニング
+- DeepSpeed ZeRO Stage-3の最適化
+- A100 GPU向けの効率的なメモリ管理
+- モジュール化された拡張可能なコードベース
+- カスタムデータセットとトレーニング設定のサポート
 
-## Requirements
+## 必要条件
 
-- A100 80GB GPU
-- Python 3.8+
-- CUDA 11.8+
+- A100 80GB GPU (推奨8枚)
+- Python 3.8以上
+- CUDA 11.8以上
 
-## Project Structure
+## プロジェクト構造
 
 ```
-project_root/
-├── config/                 # Configuration files
-│   ├── deepspeed_config.json
-│   └── training_config.py
-├── data/                   # Data processing
-│   └── data_processor.py
-├── training/              # Training logic
-│   └── trainer.py
-├── utils/                 # Utility functions
-│   └── memory_utils.py
-├── requirements.txt
-└── train.py
+finetunehub/
+├── __init__.py
+├── configs/                 # 設定ファイル
+│   ├── __init__.py
+│   ├── training_config.py   # トレーニング設定クラス
+│   └── deepspeed_config.json # DeepSpeed設定
+├── data/                    # データ処理
+│   ├── __init__.py
+│   └── dataprocessor.py     # データセット処理クラス
+├── training/               # トレーニングロジック
+│   ├── __init__.py
+│   └── trainer.py          # トレーナークラス
+├── utils/                  # ユーティリティ関数
+│   ├── __init__.py
+│   └── memory_utils.py     # メモリ管理ユーティリティ
+├── requirements.txt        # 依存パッケージ
+└── train.py               # メインスクリプト
 ```
 
-## Installation
+## インストール
 
-1. Clone the repository:
+1. リポジトリのクローン：
 ```bash
-git clone https://github.com/yourusername/gemma-finetuning.git
-cd gemma-finetuning
+git clone https://github.com/yourusername/finetunehub.git
+cd finetunehub
 ```
 
-2. Create and activate a virtual environment (optional but recommended):
+2. 仮想環境の作成と有効化（推奨）：
 ```bash
 python -m venv venv
 source venv/bin/activate  # Linux/Mac
-# or
+# または
 .\venv\Scripts\activate  # Windows
 ```
 
-3. Install dependencies:
+3. 依存パッケージのインストール：
 ```bash
 pip install -r requirements.txt
 ```
 
-## Configuration
+## 設定
 
-### Model Configuration
+### モデル設定
 
-Edit `config/training_config.py` to modify model parameters:
+`configs/training_config.py`のModelConfigクラスで設定を変更できます：
 
 ```python
 @dataclass
 class ModelConfig:
-    model_name: str = "google/gemma-2b-9b"
+    model_name: str = "llm-jp/llm-jp-3-13b"
     torch_dtype: str = "bfloat16"
     device_map: str = "auto"
 ```
 
-### Training Configuration
+### トレーニング設定
 
-Adjust training parameters in `config/training_config.py`:
+`configs/training_config.py`のTrainingConfigクラスでトレーニングパラメータを調整できます：
 
 ```python
 @dataclass
 class TrainingConfig:
-    output_dir: str = "./gemma-ft-output"
-    per_device_train_batch_size: int = 4
+    output_dir: str = "./llm-jp-ft-output"
+    per_device_train_batch_size: int = 2
     gradient_accumulation_steps: int = 16
-    learning_rate: float = 5e-5
-    # ... other parameters
+    learning_rate: float = 1e-5
+    # ... その他のパラメータ
 ```
 
-### DeepSpeed Configuration
+### DeepSpeed設定
 
-Modify DeepSpeed settings in `config/deepspeed_config.json`:
+`configs/deepspeed_config.json`でDeepSpeedの設定を変更できます：
 
 ```json
 {
     "bf16": {
-        "enabled": "auto"
+        "enabled": true
     },
     "zero_optimization": {
-        "stage": 2,
+        "stage": 3,
         "offload_optimizer": {
             "device": "cpu",
             "pin_memory": true
         }
     }
-    // ... other settings
+    // ... その他の設定
 }
 ```
 
-## Usage
+## 使用方法
 
-1. Start training:
+1. トレーニングの開始：
 ```bash
-python train.py
+deepspeed --num_gpus=8 train.py
 ```
 
-2. Monitor training:
-- Training logs will be saved in the specified output directory
-- DeepSpeed logs will show memory usage and training progress
+2. トレーニングの監視：
+- トレーニングログは指定された出力ディレクトリに保存されます
+- DeepSpeedのログはメモリ使用量とトレーニングの進行状況を表示します
 
-3. Find the trained model:
-- The final model will be saved in `{output_dir}/final_model`
+3. 学習済みモデルの取得：
+- 最終的なモデルは`{output_dir}/final_model`に保存されます
 
-## Customization
+## カスタマイズ
 
-### Using Custom Datasets
+### カスタムデータセットの使用
 
-1. Modify the `DataConfig` in `config/training_config.py`:
+1. `configs/training_config.py`のDataConfigを修正：
 ```python
 @dataclass
 class DataConfig:
     dataset_name: str = "your_dataset_name"
     chunk_length: int = 2048
+    max_length: int = 2048
 ```
 
-2. If needed, extend the `DataProcessor` class in `data/data_processor.py` to handle your dataset format.
+2. 必要に応じて`data/dataprocessor.py`のDataProcessorクラスを拡張して、データセットのフォーマットに対応します。
 
-### Memory Optimization
+### メモリ最適化
 
-Adjust memory-related parameters based on your GPU:
+GPUに応じて以下のパラメータを調整します：
 
-1. Batch size and gradient accumulation in `TrainingConfig`
-2. ZeRO stage and offload settings in `deepspeed_config.json`
-3. Chunk length for data processing in `DataConfig`
+1. TrainingConfigのバッチサイズとgradient accumulation
+2. DeepSpeed設定のZeROステージとオフロード設定
+3. DataConfigのチャンク長とmax_length
 
-## Monitoring Resources
+## トラブルシューティング
 
-Monitor GPU memory usage during training:
-```bash
-nvidia-smi
-```
+一般的な問題と解決策：
 
-## Troubleshooting
+1. メモリ不足（OOM）：
+- バッチサイズを減らす
+- gradient accumulation stepsを増やす
+- DeepSpeed設定でCPUオフロードを有効化
 
-Common issues and solutions:
+2. トレーニングが遅い：
+- メモリに余裕があればバッチサイズを増やす
+- DeepSpeedのバケットサイズを調整
+- CPUオフロード設定を確認
 
-1. Out of Memory (OOM):
-- Reduce batch size
-- Increase gradient accumulation steps
-- Enable CPU offloading in DeepSpeed config
-
-2. Training Too Slow:
-- Increase batch size if memory allows
-- Adjust DeepSpeed bucket sizes
-- Check CPU offload settings
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details
-
-## Acknowledgments
-
-- Original Gemma model by Google
-- DeepSpeed by Microsoft
-- Hugging Face Transformers library
-
-## Citation
-
-If you use this code in your research, please cite:
-
-```bibtex
-@misc{gemma-finetuning,
-  author = {Your Name},
-  title = {Gemma Fine-tuning},
-  year = {2024},
-  publisher = {GitHub},
-  url = {https://github.com/yourusername/gemma-finetuning}
-}
-```

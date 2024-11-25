@@ -17,21 +17,26 @@ class DataConfig:
 class TrainingConfig:
     output_dir: str = "./llm-jp-ft-output"
     per_device_train_batch_size: int = 4
-    gradient_accumulation_steps: int = 16
-    learning_rate: float = 3e-5
+    gradient_accumulation_steps: int = 16 
+    learning_rate: float = 1e-5
     weight_decay: float = 0.01
     num_train_epochs: int = 1
-    logging_steps: int = 10
-    warmup_ratio: int = 0.1
+    logging_steps: int = 100
+    warmup_ratio: float = 0.1
     save_strategy: str = "epoch"
     fp16: bool = False
     bf16: bool = True
-    deepspeed_config_path: str = "./config/deepspeed_config.json"
+    deepspeed_config_path: str = "./configs/deepspeed_config.json"
+    gradient_checkpointing: bool = True 
+    ddp: bool = False  
+    max_grad_norm: float = 1.0
+    lr_scheduler_type: str = "cosine"
+    warmup_steps: int = 100
 
 @dataclass
 class EnvironmentConfig:
     master_addr: str = "localhost"
-    master_port: str = "9994"
+    master_port: str = "29500"
     rank: str = "0"
     local_rank: str = "0"
     world_size: str = "1"
@@ -44,3 +49,4 @@ class EnvironmentConfig:
         os.environ["RANK"] = self.rank
         os.environ["LOCAL_RANK"] = self.local_rank
         os.environ["WORLD_SIZE"] = self.world_size
+        os.environ["TOKENIZERS_PARALLELISM"] = "false"
