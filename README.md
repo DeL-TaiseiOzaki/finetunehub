@@ -1,95 +1,192 @@
-# 8. `README.md`
+# Gemma Fine-tuning
 
-使用方法を更新します。
+This repository contains code for full parameter fine-tuning of the Gemma-2b-9b model on A100 80GB GPU. The implementation uses DeepSpeed for efficient training and memory optimization.
 
-## Fine-tuning Project
+## Features
 
-このプロジェクトは、HuggingFaceのモデルをLoRAまたはフルパラメータでファインチューニングするためのスクリプトを提供します。コードは理解しやすいようにモジュール化され、設定は `config.yaml` で管理されています。
+- Full parameter fine-tuning of Gemma-2b-9b
+- DeepSpeed ZeRO Stage-2 optimization
+- Efficient memory management for A100 GPU
+- Modular and extensible codebase
+- Support for custom datasets and training configurations
 
-### ディレクトリ構成
+## Requirements
+
+- A100 80GB GPU
+- Python 3.8+
+- CUDA 11.8+
+
+## Project Structure
 
 ```
-fine_tuning_project/
-├── configs/
-│   └── config.yaml
-├── logs/
-│   └── (ログファイル)
-├── scripts/
-│   ├── data/
-│   │   └── data_processing.py
-│   ├── main.py
-│   ├── models/
-│   │   └── model_utils.py
-│   ├── run_fine_tuning.sh
-│   └── training/
-│       └── trainer.py
-├── README.md
-└── requirements.txt
+project_root/
+├── config/                 # Configuration files
+│   ├── deepspeed_config.json
+│   └── training_config.py
+├── data/                   # Data processing
+│   └── data_processor.py
+├── training/              # Training logic
+│   └── trainer.py
+├── utils/                 # Utility functions
+│   └── memory_utils.py
+├── requirements.txt
+└── train.py
 ```
 
-### セットアップ
+## Installation
 
-必要なパッケージをインストールします。
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/gemma-finetuning.git
+cd gemma-finetuning
+```
 
+2. Create and activate a virtual environment (optional but recommended):
+```bash
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+# or
+.\venv\Scripts\activate  # Windows
+```
+
+3. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-### 使用方法
+## Configuration
 
-#### 設定ファイルの編集
+### Model Configuration
 
-`configs/config.yaml` を開き、必要な設定を編集します。
+Edit `config/training_config.py` to modify model parameters:
 
-- **モデルとデータセットの指定**:
-  - `model.name_or_path`: 使用するモデルの名前またはパス。
-  - `dataset.name`: 使用するデータセットの名前。
-
-- **出力ディレクトリの指定**:
-  - `training.output_dir`: ファインチューニング済みモデルの保存先ディレクトリ。
-
-- **トレーニングパラメータの設定**:
-  - `training.num_train_epochs`: エポック数。
-  - `training.per_device_train_batch_size`: バッチサイズ。
-  - `training.block_size`: 最大シーケンス長。
-  - `training.learning_rate`: 学習率。
-  - `training.seed`: ランダムシード。
-
-- **精度とトレーニング戦略**:
-  - `training.fp16`: FP16精度を使用する場合は `true`。
-  - `training.bf16`: BF16精度を使用する場合は `true`。
-  - `training.gradient_checkpointing`: 勾配チェックポイントを有効にする場合は `true`。
-
-- **LoRAの設定**:
-  - `lora.use_lora`: LoRAを使用する場合は `true`。
-  - `lora.r`: LoRAのランク。
-  - `lora.alpha`: LoRAのアルファ値。
-  - `lora.dropout`: LoRAのドロップアウト率。
-  - `lora.target_modules`: LoRAを適用するモジュール。
-
-- **DDPの設定**:
-  - `training.ddp`: マルチGPUトレーニングを使用する場合は `true`。
-
-#### トレーニングの実行
-
-シェルスクリプトに実行権限を与え、実行します。
-
-```bash
-cd scripts
-chmod +x run_fine_tuning.sh
-./run_fine_tuning.sh
+```python
+@dataclass
+class ModelConfig:
+    model_name: str = "google/gemma-2b-9b"
+    torch_dtype: str = "bfloat16"
+    device_map: str = "auto"
 ```
 
-### 注意事項
+### Training Configuration
 
-- **設定の一元管理**: 設定はすべて `configs/config.yaml` で管理されます。これにより、設定の変更が容易になり、再現性が高まります。
+Adjust training parameters in `config/training_config.py`:
 
-- **LoRAとフルパラメータの切り替え**: `config.yaml` 内の `lora.use_lora` を `true` または `false` に設定することで切り替えが可能です。
+```python
+@dataclass
+class TrainingConfig:
+    output_dir: str = "./gemma-ft-output"
+    per_device_train_batch_size: int = 4
+    gradient_accumulation_steps: int = 16
+    learning_rate: float = 5e-5
+    # ... other parameters
+```
 
-- **マルチGPUトレーニング**: `training.ddp` を `true` に設定すると、マルチGPUトレーニングが可能です。
+### DeepSpeed Configuration
 
-- **メモリ使用量**: 大規模なモデルやデータセットを使用する場合、メモリ不足に注意してください。
+Modify DeepSpeed settings in `config/deepspeed_config.json`:
 
-## ライセンス
+```json
+{
+    "bf16": {
+        "enabled": "auto"
+    },
+    "zero_optimization": {
+        "stage": 2,
+        "offload_optimizer": {
+            "device": "cpu",
+            "pin_memory": true
+        }
+    }
+    // ... other settings
+}
+```
 
-このプロジェクトはApache-2.0ライセンスの下で公開されています。
+## Usage
+
+1. Start training:
+```bash
+python train.py
+```
+
+2. Monitor training:
+- Training logs will be saved in the specified output directory
+- DeepSpeed logs will show memory usage and training progress
+
+3. Find the trained model:
+- The final model will be saved in `{output_dir}/final_model`
+
+## Customization
+
+### Using Custom Datasets
+
+1. Modify the `DataConfig` in `config/training_config.py`:
+```python
+@dataclass
+class DataConfig:
+    dataset_name: str = "your_dataset_name"
+    chunk_length: int = 2048
+```
+
+2. If needed, extend the `DataProcessor` class in `data/data_processor.py` to handle your dataset format.
+
+### Memory Optimization
+
+Adjust memory-related parameters based on your GPU:
+
+1. Batch size and gradient accumulation in `TrainingConfig`
+2. ZeRO stage and offload settings in `deepspeed_config.json`
+3. Chunk length for data processing in `DataConfig`
+
+## Monitoring Resources
+
+Monitor GPU memory usage during training:
+```bash
+nvidia-smi
+```
+
+## Troubleshooting
+
+Common issues and solutions:
+
+1. Out of Memory (OOM):
+- Reduce batch size
+- Increase gradient accumulation steps
+- Enable CPU offloading in DeepSpeed config
+
+2. Training Too Slow:
+- Increase batch size if memory allows
+- Adjust DeepSpeed bucket sizes
+- Check CPU offload settings
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details
+
+## Acknowledgments
+
+- Original Gemma model by Google
+- DeepSpeed by Microsoft
+- Hugging Face Transformers library
+
+## Citation
+
+If you use this code in your research, please cite:
+
+```bibtex
+@misc{gemma-finetuning,
+  author = {Your Name},
+  title = {Gemma Fine-tuning},
+  year = {2024},
+  publisher = {GitHub},
+  url = {https://github.com/yourusername/gemma-finetuning}
+}
+```

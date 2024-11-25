@@ -3,26 +3,26 @@ from typing import Optional
 
 @dataclass
 class ModelConfig:
-    model_name: str = "google/gemma-2b-9b"
+    model_name: str = "llm-jp/llm-jp-3-13b"
     torch_dtype: str = "bfloat16"
     device_map: str = "auto"
 
 @dataclass
 class DataConfig:
-    dataset_name: str = "kunishou/databricks-dolly-15k-ja"
+    dataset_name: str = "DeL-TaiseiOzaki/Tengentoppa-sft-v1.0"
     chunk_length: int = 2048
     max_length: int = 2048
 
 @dataclass
 class TrainingConfig:
-    output_dir: str = "./gemma-ft-output"
+    output_dir: str = "./llm-jp-ft-output"
     per_device_train_batch_size: int = 4
     gradient_accumulation_steps: int = 16
-    learning_rate: float = 5e-5
+    learning_rate: float = 3e-5
     weight_decay: float = 0.01
     num_train_epochs: int = 1
-    logging_steps: int = 5
-    warmup_steps: int = 10
+    logging_steps: int = 10
+    warmup_ratio: int = 0.1
     save_strategy: str = "epoch"
     fp16: bool = False
     bf16: bool = True
