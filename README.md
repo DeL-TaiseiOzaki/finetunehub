@@ -1,160 +1,157 @@
-# LLM-JP Fine-tuning
+# LLM-JP Finetuning Framework
 
-このリポジトリには、LLM-JP-3-13Bモデルのフルパラメータファインチューニングのためのコードが含まれています。DeepSpeedを使用して効率的なトレーニングとメモリ最適化を実現しています。
+LLM-JP（Japanese Large Language Model）のファインチューニングを行うためのフレームワークです。フルパラメータファインチューニングとLoRAの両方に対応しています。
 
-## 機能
+## 特徴
 
-- LLM-JP-3-13Bのフルパラメータファインチューニング
-- DeepSpeed ZeRO Stage-3の最適化
-- A100 GPU向けの効率的なメモリ管理
-- モジュール化された拡張可能なコードベース
-- カスタムデータセットとトレーニング設定のサポート
+- フルパラメータファインチューニングとLoRAの柔軟な切り替え
+- DeepSpeedによる分散学習のサポート
+- メモリ効率を考慮した実装（Gradient Checkpointing等）
+- 詳細なログ出力
+- コマンドラインからの柔軟な設定
 
-## 必要条件
+## 必要要件
 
-- A100 80GB GPU (推奨8枚)
 - Python 3.8以上
-- CUDA 11.8以上
-
-## プロジェクト構造
-
-```
-finetunehub/
-├── __init__.py
-├── configs/                 # 設定ファイル
-│   ├── __init__.py
-│   ├── training_config.py   # トレーニング設定クラス
-│   └── deepspeed_config.json # DeepSpeed設定
-├── data/                    # データ処理
-│   ├── __init__.py
-│   └── dataprocessor.py     # データセット処理クラス
-├── training/               # トレーニングロジック
-│   ├── __init__.py
-│   └── trainer.py          # トレーナークラス
-├── utils/                  # ユーティリティ関数
-│   ├── __init__.py
-│   └── memory_utils.py     # メモリ管理ユーティリティ
-├── requirements.txt        # 依存パッケージ
-└── train.py               # メインスクリプト
-```
+- PyTorch 2.0以上
+- transformers
+- datasets
+- peft（LoRA使用時）
+- deepspeed（分散学習時）
 
 ## インストール
 
-1. リポジトリのクローン：
 ```bash
-git clone https://github.com/yourusername/finetunehub.git
-cd finetunehub
-```
-
-2. 仮想環境の作成と有効化（推奨）：
-```bash
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-# または
-.\venv\Scripts\activate  # Windows
-```
-
-3. 依存パッケージのインストール：
-```bash
+git clone [repository-url]
+cd llm-jp-finetuning
 pip install -r requirements.txt
-```
-
-## 設定
-
-### モデル設定
-
-`configs/training_config.py`のModelConfigクラスで設定を変更できます：
-
-```python
-@dataclass
-class ModelConfig:
-    model_name: str = "llm-jp/llm-jp-3-13b"
-    torch_dtype: str = "bfloat16"
-    device_map: str = "auto"
-```
-
-### トレーニング設定
-
-`configs/training_config.py`のTrainingConfigクラスでトレーニングパラメータを調整できます：
-
-```python
-@dataclass
-class TrainingConfig:
-    output_dir: str = "./llm-jp-ft-output"
-    per_device_train_batch_size: int = 2
-    gradient_accumulation_steps: int = 16
-    learning_rate: float = 1e-5
-    # ... その他のパラメータ
-```
-
-### DeepSpeed設定
-
-`configs/deepspeed_config.json`でDeepSpeedの設定を変更できます：
-
-```json
-{
-    "bf16": {
-        "enabled": true
-    },
-    "zero_optimization": {
-        "stage": 3,
-        "offload_optimizer": {
-            "device": "cpu",
-            "pin_memory": true
-        }
-    }
-    // ... その他の設定
-}
 ```
 
 ## 使用方法
 
-1. トレーニングの開始：
+### 基本的な使用方法
+
+1. フルパラメータファインチューニング：
+
 ```bash
-deepspeed --num_gpus=8 train.py
+python train.py \
+    --model_name "llm-jp/llm-jp-3-13b" \
+    --dataset_name "your-dataset" \
+    --output_dir "./full-ft-output" \
+    --training_mode "full" \
+    --batch_size 2 \
+    --gradient_accumulation_steps 32 \
+    --learning_rate 1e-5 \
+    --num_epochs 2 \
+    --bf16 \
+    --gradient_checkpointing \
+    --deepspeed_config "./configs/deepspeed_config.json"
 ```
 
-2. トレーニングの監視：
-- トレーニングログは指定された出力ディレクトリに保存されます
-- DeepSpeedのログはメモリ使用量とトレーニングの進行状況を表示します
+2. LoRAファインチューニング：
 
-3. 学習済みモデルの取得：
-- 最終的なモデルは`{output_dir}/final_model`に保存されます
-
-## カスタマイズ
-
-### カスタムデータセットの使用
-
-1. `configs/training_config.py`のDataConfigを修正：
-```python
-@dataclass
-class DataConfig:
-    dataset_name: str = "your_dataset_name"
-    chunk_length: int = 2048
-    max_length: int = 2048
+```bash
+python train.py \
+    --model_name "llm-jp/llm-jp-3-13b" \
+    --dataset_name "your-dataset" \
+    --output_dir "./lora-ft-output" \
+    --training_mode "lora" \
+    --batch_size 2 \
+    --learning_rate 1e-4 \
+    --num_epochs 3 \
+    --bf16 \
+    --lora_r 8 \
+    --lora_alpha 16 \
+    --lora_dropout 0.05 \
+    --lora_target_modules "q_proj" "v_proj" "k_proj" "o_proj"
 ```
 
-2. 必要に応じて`data/dataprocessor.py`のDataProcessorクラスを拡張して、データセットのフォーマットに対応します。
+### コマンドライン引数
 
-### メモリ最適化
+#### 基本設定
+- `--model_name`: モデル名（デフォルト: "llm-jp/llm-jp-3-13b"）
+- `--dataset_name`: データセット名（必須）
+- `--output_dir`: 出力ディレクトリ（必須）
+- `--training_mode`: トレーニングモード（"full" または "lora"、デフォルト: "full"）
 
-GPUに応じて以下のパラメータを調整します：
+#### データ設定
+- `--chunk_length`: チャンク長（デフォルト: 2048）
+- `--max_length`: 最大長（デフォルト: 2048）
 
-1. TrainingConfigのバッチサイズとgradient accumulation
-2. DeepSpeed設定のZeROステージとオフロード設定
-3. DataConfigのチャンク長とmax_length
+#### トレーニング設定
+- `--batch_size`: バッチサイズ（デフォルト: 2）
+- `--gradient_accumulation_steps`: 勾配累積ステップ数（デフォルト: 32）
+- `--learning_rate`: 学習率（デフォルト: 1e-5）
+- `--num_epochs`: エポック数（デフォルト: 2）
 
-## トラブルシューティング
+#### 最適化設定
+- `--fp16`: FP16を使用
+- `--bf16`: BF16を使用
+- `--gradient_checkpointing`: 勾配チェックポイントを使用
+- `--deepspeed_config`: DeepSpeed設定ファイルのパス
 
-一般的な問題と解決策：
+#### LoRA設定
+- `--lora_r`: LoRAのランク（デフォルト: 8）
+- `--lora_alpha`: LoRAのアルファ（デフォルト: 16）
+- `--lora_dropout`: LoRAのドロップアウト（デフォルト: 0.05）
+- `--lora_target_modules`: LoRAのターゲットモジュール（スペース区切りで複数指定可能）
+- `--lora_path`: 事前学習済みLoRA重みのパス
 
-1. メモリ不足（OOM）：
-- バッチサイズを減らす
-- gradient accumulation stepsを増やす
-- DeepSpeed設定でCPUオフロードを有効化
+## プロジェクト構造
 
-2. トレーニングが遅い：
-- メモリに余裕があればバッチサイズを増やす
-- DeepSpeedのバケットサイズを調整
-- CPUオフロード設定を確認
+```
+llm-jp-finetuning/
+├── configs/
+│   ├── __init__.py
+│   ├── training_config.py
+│   └── deepspeed_config.json
+├── data/
+│   ├── __init__.py
+│   └── dataprocessor.py
+├── training/
+│   ├── __init__.py
+│   └── trainer.py
+├── utils/
+│   ├── __init__.py
+│   └── memory_utils.py
+├── train.py
+├── requirements.txt
+└── README.md
+```
 
+## デバッグとトラブルシューティング
+
+1. メモリエラー
+   - Gradient Checkpointingを有効化（`--gradient_checkpointing`）
+   - バッチサイズを減らす
+   - LoRAを使用する
+
+2. DeepSpeedエラー
+   - DeepSpeed設定ファイルのパスが正しいか確認
+   - LoRAモードではDeepSpeedが無効化されることに注意
+
+3. トークン化エラー
+   - `max_length`パラメータを調整
+   - データセットの前処理を確認
+
+## ライセンス
+
+MIT License
+
+## 謝辞
+
+このプロジェクトは以下のライブラリを使用しています：
+- Transformers by Hugging Face
+- PEFT by Hugging Face
+- DeepSpeed by Microsoft
+- PyTorch by Facebook AI Research
+
+## 注意事項
+
+- 学習には大量のGPUメモリが必要です
+- フルパラメータファインチューニングには高性能なGPUが必須です
+- LoRAを使用することで、より少ないリソースでのファインチューニングが可能です
+
+## 貢献
+
+バグ報告や機能追加の提案は、Issuesで受け付けています。プルリクエストも歓迎します。

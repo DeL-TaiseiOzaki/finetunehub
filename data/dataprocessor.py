@@ -32,8 +32,11 @@ class DataProcessor:
             )
             texts.append(f"{prompt}{self.tokenizer.eos_token}")
         
+        # UTF-8エンコーディングを使用して文字列をバイト列に変換
+        texts_bytes = [text.encode('utf-8') for text in texts]
+        
         return {
-            "text": np.array(texts, dtype=np.string_)
+            "text": np.array(texts_bytes, dtype=np.object_)  # np.object_を使用して任意のバイト列を格納
         }
 
     def prepare_dataset(self, dataset_name: str):
@@ -50,8 +53,11 @@ class DataProcessor:
         )
         
         def tokenize_function(examples):
+            # バイト列を文字列にデコード
+            texts = [text.decode('utf-8') for text in examples["text"]]
+            
             model_inputs = self.tokenizer(
-                examples["text"],
+                texts,
                 truncation=True,
                 max_length=self.max_length,
                 padding="max_length",

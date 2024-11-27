@@ -4,4 +4,9 @@ accelerate
 deepspeed
 torch
 ninja
-sentencepiece
+numpy
+tqdm
+bitsandbytes
+wandb
+scipy
+peft
