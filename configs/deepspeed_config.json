@@ -5,7 +5,9 @@
     "zero_optimization": {
         "stage": 2,
         "allgather_partitions": true,
+        "allgather_bucket_size": 5e8,
         "reduce_scatter": true,
+        "reduce_bucket_size": 5e8,
         "overlap_comm": true,
         "contiguous_gradients": true,
         "offload_optimizer": {
@@ -13,7 +15,7 @@
             "pin_memory": true
         }
     },
-    "gradient_accumulation_steps": 16,
+    "gradient_accumulation_steps": 32,
     "gradient_clipping": 1.0,
     "steps_per_print": 100,
     "train_micro_batch_size_per_gpu": "auto",  

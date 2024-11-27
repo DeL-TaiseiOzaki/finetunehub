@@ -16,11 +16,11 @@ class DataConfig:
 @dataclass
 class TrainingConfig:
     output_dir: str = "./llm-jp-ft-output"
-    per_device_train_batch_size: int = 4
-    gradient_accumulation_steps: int = 16 
+    per_device_train_batch_size: int = 2
+    gradient_accumulation_steps: int = 32 
     learning_rate: float = 1e-5
     weight_decay: float = 0.01
-    num_train_epochs: int = 1
+    num_train_epochs: int = 2
     logging_steps: int = 100
     warmup_ratio: float = 0.1
     save_strategy: str = "epoch"
