@@ -15,8 +15,8 @@ class DataConfig:
 
 @dataclass
 class LoRAConfig:
-    r: int = 8  # LoRAのランク
-    alpha: int = 16  # スケーリング係数
+    r: int = 32  # LoRAのランク
+    alpha: int = 32  # スケーリング係数
     dropout: float = 0.05
     bias: str = "none"  # none, all, または lora_only
     task_type: str = "CAUSAL_LM"
@@ -32,7 +32,7 @@ class TrainingConfig:
     
     # トレーニングのハイパーパラメータ
     per_device_train_batch_size: int = 2
-    gradient_accumulation_steps: int = 32 
+    gradient_accumulation_steps: int = 16 
     learning_rate: float = 1e-5
     weight_decay: float = 0.01
     num_train_epochs: int = 2
@@ -43,7 +43,7 @@ class TrainingConfig:
     save_strategy: str = "epoch"
     fp16: bool = False
     bf16: bool = True
-    gradient_checkpointing: bool = True
+    gradient_checkpointing: bool = False
     max_grad_norm: float = 1.0
     lr_scheduler_type: str = "cosine"
     warmup_steps: int = 100

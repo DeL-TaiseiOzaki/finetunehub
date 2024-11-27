@@ -27,3 +27,12 @@ python3 train.py \
     --lora_alpha 16 \
     --lora_dropout 0.05 \
     --lora_target_modules "q_proj" "v_proj" "k_proj" "o_proj"
+
+python3 train.py \
+    --model_name "llm-jp/llm-jp-3-13b" \
+    --dataset_name "DeL-TaiseiOzaki/ichikara_003_all" \
+    --output_dir "./lora-ft-output" \
+    --training_mode "lora" \
+    --batch_size 2 \
+    --learning_rate 1e-4 \
+    --num_epochs 2 

@@ -29,7 +29,7 @@ class LLMJPTrainer:
         self.model = None
         self.trainer = None
 
-   def setup(self):
+    def setup(self):
         """モデルとトークナイザーの初期化"""
         logger.info("トークナイザーを初期化しています...")
         self.tokenizer = AutoTokenizer.from_pretrained(
@@ -100,11 +100,19 @@ class LLMJPTrainer:
     def create_trainer(self, train_dataset):
         """Trainerの作成"""
         logger.info("トレーニング引数を設定しています...")
-        
+
         # DeepSpeed設定の調整（LoRAモードでは無効化）
         deepspeed_config = None
         if self.training_config.training_mode == "full" and self.training_config.deepspeed_config_path:
             deepspeed_config = self.training_config.deepspeed_config_path
+
+        # DDPの設定調整
+        ddp_find_unused_parameters = None
+        if self.training_config.training_mode == "full":
+            ddp_find_unused_parameters = False  # フルファインチューニングの場合のみ有効化
+        elif self.training_config.training_mode == "lora":
+            logger.info("LoRAモードではDDPを無効化します...")
+            ddp_find_unused_parameters = False
 
         training_args = TrainingArguments(
             output_dir=self.training_config.output_dir,
@@ -118,9 +126,9 @@ class LLMJPTrainer:
             save_strategy=self.training_config.save_strategy,
             fp16=self.training_config.fp16,
             bf16=self.training_config.bf16,
-            gradient_checkpointing=self.training_config.gradient_checkpointing,
+            gradient_checkpointing=False,
             deepspeed=deepspeed_config,
-            ddp_find_unused_parameters=False if self.training_config.ddp else None,
+            ddp_find_unused_parameters=ddp_find_unused_parameters,  
             remove_unused_columns=False,
             lr_scheduler_type=self.training_config.lr_scheduler_type,
             max_grad_norm=self.training_config.max_grad_norm
