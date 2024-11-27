@@ -22,9 +22,9 @@ class DataProcessor:
         output = sample['output']
         
         if input_text:
-            prompt = f"指示:\n{instruction}\n\n入力:\n{input_text}\n\n出力:\n{output}"
+            prompt = f"\n{instruction}\n\n{input_text}\n\n{output}"
         else:
-            prompt = f"指示:\n{instruction}\n\n出力:\n{output}"
+            prompt = f"{instruction}\n\n{output}"
             
         return prompt
 
@@ -46,13 +46,20 @@ class DataProcessor:
         )
         
         logger.info("データセットをトークン化しています...")
-        def tokenize_function(examples):
-            return self.tokenizer(
+        def tokenize_function(self, examples):
+            # トークン化
+            model_inputs = self.tokenizer(
                 examples["text"],
                 truncation=True,
                 max_length=self.max_length,
-                padding="max_length"
+                padding="max_length",
+                return_token_type_ids=False
             )
+            
+            # labelsの追加（input_idsと同じ値を使用）
+            model_inputs["labels"] = model_inputs["input_ids"].copy()
+            
+            return model_inputs
         
         tokenized_dataset = dataset.map(
             tokenize_function,

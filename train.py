@@ -45,6 +45,7 @@ def main():
             max_length=data_config.max_length
         )
         dataset = data_processor.prepare_dataset(data_config.dataset_name)
+        print(len(dataset))
         
         # トレーニングの実行
         logger.info("トレーニングを開始します...")

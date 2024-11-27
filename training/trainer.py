@@ -5,10 +5,11 @@ from transformers import (
     Trainer,
     TrainingArguments
 )
-from ..configs.training_config import ModelConfig, TrainingConfig
+from configs.training_config import ModelConfig, TrainingConfig
 from typing import Optional
 import logging
-from ..utils.memory_utils import clear_memory
+from utils.memory_utils import clear_memory
+
 
 logger = logging.getLogger(__name__)
 

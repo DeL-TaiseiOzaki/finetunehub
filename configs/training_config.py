@@ -9,7 +9,7 @@ class ModelConfig:
 
 @dataclass
 class DataConfig:
-    dataset_name: str = "DeL-TaiseiOzaki/Tengentoppa-sft-v1.0"
+    dataset_name: str = "DeL-TaiseiOzaki/ichikara_003_all"
     chunk_length: int = 2048
     max_length: int = 2048
 
